@@ -18,7 +18,10 @@ class SocketService with ChangeNotifier {
   void _initConfig() {
     // Dart client
 
-    _socket = IO.io('http://192.168.0.100:3000/', {
+    // url local --> http://192.168.0.100:3000/
+    // url nube  --> https://luisnu-socket-server-bands.herokuapp.com/
+
+    _socket = IO.io('https://luisnu-socket-server-bands.herokuapp.com/', {
       'transports': ['websocket'],
       'autoConnect': true,
     });
