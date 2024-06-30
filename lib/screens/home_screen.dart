@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 //---------------------- _handleActiveBands --------------------------
   _handleActiveBands(dynamic payload) {
-    this.bands = (payload as List).map((band) => Band.fromMap(band)).toList();
+    bands = (payload as List).map((band) => Band.fromMap(band)).toList();
     setState(() {});
   }
 
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 10),
-            child: socketService.serverStatus == ServerStatus.Online
+            child: socketService.serverStatus == ServerStatus.online
                 ? Icon(
                     Icons.check_circle,
                     color: Colors.blue[300],
@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          bands.length > 0 ? _showGraph() : Container(),
+          bands.isNotEmpty ? _showGraph() : Container(),
           Expanded(
             child: ListView.builder(
               itemCount: bands.length,

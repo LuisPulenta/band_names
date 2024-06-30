@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:socket_io_client/socket_io_client.dart' as io;
 
-enum ServerStatus { Online, Offline, Connecting }
+enum ServerStatus { online, offline, connecting }
 
 class SocketService with ChangeNotifier {
-  ServerStatus _serverStatus = ServerStatus.Connecting;
-  late IO.Socket _socket;
+  ServerStatus _serverStatus = ServerStatus.connecting;
+  late io.Socket _socket;
 
   ServerStatus get serverStatus => _serverStatus;
 
-  IO.Socket get socket => _socket;
+  io.Socket get socket => _socket;
 
   SocketService() {
     _initConfig();
@@ -21,18 +21,18 @@ class SocketService with ChangeNotifier {
     // url local --> http://192.168.0.100:3000/
     // url nube  --> https://luisnu-socket-server-bands.herokuapp.com/
 
-    _socket = IO.io('https://luisnu-socket-server-bands.herokuapp.com/', {
+    _socket = io.io('http://192.168.0.100:3000/', {
       'transports': ['websocket'],
       'autoConnect': true,
     });
 
     _socket.on('connect', (_) {
-      _serverStatus = ServerStatus.Online;
+      _serverStatus = ServerStatus.online;
       notifyListeners();
     });
 
     _socket.on('disconnect', (data) {
-      _serverStatus = ServerStatus.Offline;
+      _serverStatus = ServerStatus.offline;
       notifyListeners();
     });
     // _socket.on('nuevo-mensaje', (payload) {

@@ -10,7 +10,7 @@ class StatusScreen extends StatelessWidget {
     final socketService = Provider.of<SocketService>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Status'),
+        title: const Text('Status'),
         centerTitle: true,
       ),
       body: Center(
@@ -20,7 +20,7 @@ class StatusScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.message),
+        child: const Icon(Icons.message),
         onPressed: () {
           socketService.socket.emit('emitir-mensaje',
               {'nombre': 'Flutter', 'mensaje': 'Hola desde Flutter'});
